@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "bucket" {
   }
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = "${var.bucket_prevent_destruction}"
   }
 }
 
