@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "terraform_state" {
+resource "aws_s3_bucket" "bucket" {
   bucket = "${var.bucket_name}"
 
   versioning {
@@ -10,14 +10,14 @@ resource "aws_s3_bucket" "terraform_state" {
   }
 }
 
-data "aws_iam_policy_document" "remote-backend-access" {
+data "aws_iam_policy_document" "bucket-access" {
   statement {
     actions = [
       "${var.bucket_actions}"
     ]
 
     resources = [
-      "${aws_s3_bucket.terraform_state.arn}"
+      "${aws_s3_bucket.bucket.arn}"
     ]
     principals {
       identifiers = [
@@ -39,12 +39,12 @@ data "aws_iam_policy_document" "remote-backend-access" {
       type = "AWS"
     }
     resources = [
-      "${aws_s3_bucket.terraform_state.arn}/*"
+      "${aws_s3_bucket.bucket.arn}/*"
     ]
   }
 }
 
-resource "aws_s3_bucket_policy" "terraform_state" {
-  bucket = "${aws_s3_bucket.terraform_state.bucket}"
-  policy = "${data.aws_iam_policy_document.remote-backend-access.json}"
+resource "aws_s3_bucket_policy" "bucket" {
+  bucket = "${aws_s3_bucket.bucket.bucket}"
+  policy = "${data.aws_iam_policy_document.bucket-access.json}"
 }
