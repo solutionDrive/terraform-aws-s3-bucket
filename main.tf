@@ -46,5 +46,5 @@ data "aws_iam_policy_document" "remote-backend-access" {
 
 resource "aws_s3_bucket_policy" "terraform_state" {
   bucket = "${aws_s3_bucket.terraform_state.bucket}"
-  policy = "${var.bucket_policy}"
+  policy = "${data.aws_iam_policy_document.remote-backend-access.json}"
 }
