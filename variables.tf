@@ -23,11 +23,6 @@ variable "bucket_object_actions" {
   ]
 }
 
-variable "bucket_policy" {
-  type = "string"
-  description = "Policy JSON to attach to the bucket"
-}
-
 variable "bucket_prevent_destruction" {
   description = "Bool value, whether the bucket should be protected from destruction"
 }
