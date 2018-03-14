@@ -23,11 +23,6 @@ variable "bucket_object_actions" {
   ]
 }
 
-variable "bucket_prevent_destruction" {
-  description = "Bool value, whether the bucket should be protected from destruction"
-  default = false
-}
-
 variable "bucket_role_name" {}
 
 variable "bucket_versioning" {
